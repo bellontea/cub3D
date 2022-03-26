@@ -1,15 +1,15 @@
 #include "cub3d.h"
 
-int init_mlx(t_vars *vars, int argc, char **argv)
+int init_mlx(t_win *win, int argc, char **argv)
 {
-	vars->mlx = mlx_init();
-	if (vars->mlx == NULL)
+	win->mlx = mlx_init();
+	if (win->mlx == NULL)
 		return(1);
-	vars->win = mlx_new_window(vars->mlx, WIN_WIDTH, WIN_HEIGHT, "cub3d");
-	vars->img = init_new_img(vars->mlx);
-	// mlx_key_hook(vars->win, key_hook, vars);
-	// mlx_mouse_hook(vars->win, mouse_hook, vars);
-	mlx_hook(vars->win, 17, 0, close_win, vars);
-	mlx_loop_hook(vars->mlx, render, vars);
+	win->win = mlx_new_window(win->mlx, WIN_WIDTH, WIN_HEIGHT, "cub3d");
+	win->img = init_new_img(win->mlx);
+	// mlx_key_hook(win->win, key_hook, win);
+	// mlx_mouse_hook(win->win, mouse_hook, win);
+	mlx_hook(win->win, 17, 0, close_win, win);
+	mlx_loop_hook(win->mlx, render, win);
 	return (0);
 }
