@@ -26,7 +26,8 @@ typedef struct	s_vars {
 	void			*mlx;
 	void			*win;
 	t_img_data		*img;
-	unsigned int	iter; 
+	unsigned int	iter;
+	int				**map;
 }				t_vars;
 
 int	render(t_vars *vars);

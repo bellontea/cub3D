@@ -10,6 +10,6 @@ int init_mlx(t_vars *vars, int argc, char **argv)
 	// mlx_key_hook(vars->win, key_hook, vars);
 	// mlx_mouse_hook(vars->win, mouse_hook, vars);
 	mlx_hook(vars->win, 17, 0, close_win, vars);
-	mlx_hook(vars->win, 10, 0, render, vars);
+	mlx_loop_hook(vars->mlx, render, vars);
 	return (0);
 }
