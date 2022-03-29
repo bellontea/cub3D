@@ -7,7 +7,13 @@
 # include <math.h>
 # include <mlx.h>
 # include "libft.h"
+# include "get_next_line.h"
 # include "key.h"
+# include <sys/types.h>
+# include <sys/stat.h>
+# include <fcntl.h>  
+# include <stdio.h>
+
 
 # define US_INT unsigned short int
 
@@ -74,5 +80,8 @@ int init_mlx(t_win *win, int argc, char **argv);
 t_image *init_new_img(void *mlx);
 int	create_trgb(US_INT t, US_INT r, US_INT g, US_INT b);
 int close_win(int key, t_all *vars);
+int set_map(t_all *vars, char *file_name);
+void	pixel_put(t_image *data, int x, int y, int color);
+void mini_map(t_all *vars, int x, int y, int size);
 
 #endif
