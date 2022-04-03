@@ -66,22 +66,32 @@ typedef struct	s_textures
 	t_point	ceiling;
 }				t_textures;
 
+typedef struct	s_move
+{
+	int		key_w;
+	int		key_a;
+	int		key_s;
+	int		key_d;
+}				t_move;
+
 typedef struct	s_all {
 	t_win		win;
 	t_player	player;
 	t_textures	textures;
+	t_move		move;
 	char		**map;
 }				t_all;
 
 int		render(t_all *vars);
 void	refresh_win(t_win *win);
-int		init_mlx(t_win *win, int argc, char **argv);
+int		init_mlx(t_all *vars, int argc, char **argv);
 t_image	*init_new_img(void *mlx);
 int		create_trgb(US_INT t, US_INT r, US_INT g, US_INT b);
 int		close_win(t_all *vars);
 int		set_map(t_all *vars, char *file_name);
 void	pixel_put(t_image *data, int x, int y, int color);
 void	mini_map(t_all *vars);
-int		key_hook(int key, t_all *vars);
+int		key_press(int key, t_all *vars);
+int	key_realease(int key, t_all *vars);
 
 #endif
