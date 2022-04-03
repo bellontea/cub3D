@@ -14,7 +14,7 @@ int	render(t_all *vars)
 	// for (int i = 0; i < 10000; i++);
 	for(int i = 0; i < vars->win.iter % (int)WIN_HEIGHT; i++)
 		pixel_put(vars->win.img, i, 10, create_trgb(0, 255, 255, 255));
-	mini_map(vars, 0, 50, 15);
+	mini_map(vars);
 	refresh_win(&vars->win);
 	return (0);
 }

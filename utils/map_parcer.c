@@ -73,6 +73,14 @@ int check_map(char **map)
 		}
 		y++;
 	}
+	y--;
+	x = 0;
+	while(map[y][x])
+	{
+		if(!(map[y][x] == ' ' || map[y][x] == '1' || map[y][x] == '\n'))
+			return(1);
+		x++;
+	}
 	return (0);
 }
 
@@ -90,6 +98,13 @@ int set_map(t_all *vars, char *file_name)
 		vars->map = ft_realloc(vars->map, i * sizeof(char *),
 			(i + 1) * sizeof(char *));
 		vars->map[i] = get_next_line(file);
+		if (vars->map[i] && ft_strchr(vars->map[i], 'P'))
+		{
+			if(vars->player.y)
+				return (1);
+			vars->player.y = i;
+			vars->player.x = ft_strchr(vars->map[i], 'P') - vars->map[i];
+		}
 		add_space(vars->map + i);
 		i++;
 	}while (vars->map[i - 1]);

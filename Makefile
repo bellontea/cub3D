@@ -11,7 +11,7 @@ INCLIB		=	$(INC)/../lib
 
 SRCS_UTILS	=	$(shell ls ./utils/*.c)
 
-SRC		=	$(SRCS_UTILS) main.c
+SRC			=	$(SRCS_UTILS) main.c
 OBJ			=	$(addprefix $(OBJ_DIR)/, $(SRC:.c=.o)) $(LIBFT)
 
 CFLAGS		=	-o3 -I$(PATH_HEADER) -Imlx -I$(INC) #-Wall -Wextra -Werror 
