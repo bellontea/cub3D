@@ -70,9 +70,9 @@ void set_player(t_point point, t_all * vars, int size)
 {
 	float	temp;
 
-	point.x += modff(vars->player.x, &temp) * point.z;
+	point.x += modff(vars->player.x - 0.2 , &temp) * point.z;
 	point.x += temp * point.z;
-	point.y += modff(vars->player.y, &temp) * point.z;
+	point.y += modff(vars->player.y - 0.2, &temp) * point.z;
 	point.y += temp * point.z;
 	point.z = size / 2;
 	drow_sqr(point, create_trgb(0, 250, 0 , 0), vars->win.img);

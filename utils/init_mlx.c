@@ -4,7 +4,7 @@ int init_mlx(t_all *vars, int argc, char **argv)
 {
 	vars->win.mlx = mlx_init();
 	if (vars->win.mlx == NULL)
-		return(1);
+		return (1);
 	vars->win.win = mlx_new_window(vars->win.mlx, WIN_WIDTH, WIN_HEIGHT, "cub3d");
 	vars->win.img = init_new_img(vars->win.mlx);
 	mlx_hook(vars->win.win, 2, 1L << 0, key_press, vars);

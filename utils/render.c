@@ -7,22 +7,45 @@ void clear_screen(t_all *vars)
 	vars->win.img = init_new_img(vars->win.mlx);
 }
 
+int collision(t_all *vars)
+{
+	float	x;
+	float	y;
+	float	size_c;
+
+	size_c = 0.2;
+	y = -size_c;
+	while (y < size_c + 0.1)
+	{
+		x = -size_c;
+		while (x < size_c + 0.1)
+		{
+			if (vars->map[(int)(vars->player.y + y)][(int)(vars->player.x + x)] != '0')
+				return (1);
+			x += size_c;
+		}
+		y += size_c;
+	}
+	return (0);
+}
+
 void move_p(t_all *vars)
 {
-	double	shift = 0.02;
+	double	shift = 0.05;
 	double	temp;
 
+	
 	vars->player.y -= vars->move.key_w * shift;
-	if(vars->map[(int)vars->player.y][(int)vars->player.x] != '0')
+	if (collision(vars))
 		vars->player.y += vars->move.key_w * shift;
 	vars->player.x -= vars->move.key_a * shift;
-	if(vars->map[(int)vars->player.y][(int)vars->player.x] != '0')
+	if (collision(vars))
 		vars->player.x += vars->move.key_a * shift;
 	vars->player.y += vars->move.key_s * shift;
-	if(vars->map[(int)(vars->player.y + 0.5)][(int)(vars->player.x + 0.5)] != '0')
+	if (collision(vars))
 		vars->player.y -= vars->move.key_s * shift;
 	vars->player.x += vars->move.key_d * shift;
-	if(vars->map[(int)(vars->player.y + 0.5)][(int)(vars->player.x + 0.5)] != '0')
+	if (collision(vars))
 		vars->player.x -= vars->move.key_d * shift;
 }
 
