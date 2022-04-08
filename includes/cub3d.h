@@ -17,6 +17,7 @@
 
 # define US_INT unsigned short int
 
+# define PI 3,141592
 # define WIN_WIDTH	1000.L
 # define WIN_HEIGHT 1000.L
 # define SCALE 16 // условный размер каждого квадратика в карте
@@ -51,6 +52,7 @@ typedef struct	s_player //структура для игрока и луча
 {
 	float	x;
 	float	y;
+	float	angle;
 	float	dir;
 	float	start;
 	float	end;
@@ -72,6 +74,8 @@ typedef struct	s_move
 	int		key_a;
 	int		key_s;
 	int		key_d;
+	int		key_l;
+	int		key_r;
 }				t_move;
 
 typedef struct	s_all {

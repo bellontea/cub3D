@@ -66,10 +66,36 @@ void drow_line(t_point point, char *line, int size, t_image *img)
 	}
 }
 
+void line(t_point start, double dx, double dy, t_all *vars)
+{
+	t_point	point;
+	float 	temp;
+	float	x;
+	float	y;
+
+
+	x = vars->player.x;
+	y = vars->player.y;
+	dx += vars->player.x;
+	dy += vars->player.y;
+	point.z = 1;
+	while (x < dx || y < dy)
+	{
+		point.x += modff(x , &temp) * start.z;
+		point.x += temp * start.z;
+		point.y += modff(y, &temp) * start.z;
+		point.y += temp * start.z;
+		drow_sqr(point, create_trgb(0, 250, 0 , 0), vars->win.img);
+		x += 0.1;
+		y += 0.1;
+	}
+}
+
 void set_player(t_point point, t_all * vars, int size)
 {
 	float	temp;
 
+	// line(point, cos(vars->player.angle) * 5, sin(vars->player.angle) * 5, vars);
 	point.x += modff(vars->player.x - 0.2 , &temp) * point.z;
 	point.x += temp * point.z;
 	point.y += modff(vars->player.y - 0.2, &temp) * point.z;
