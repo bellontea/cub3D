@@ -100,6 +100,8 @@ int set_map(t_all *vars, char *file_name)
 		vars->map[i] = get_next_line(file);
 		while (vars->map[i] && ft_strchr(vars->map[i], 'P'))
 		{
+			if (vars->player.pos.y != 0)
+				return 1;
 			vars->player.pos.y = i + 0.5;
 			vars->player.pos.x = (ft_strchr(vars->map[i], 'P') - vars->map[i]) + 0.5 ;
 			ft_strchr(vars->map[i], 'P')[0]= '0';

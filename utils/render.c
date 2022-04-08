@@ -34,14 +34,14 @@ void	change_angle(t_all *vars)
 	if(vars->move.key_l)
 	{
 		vars->player.angle -= 0.05;
-		if(vars->player.angle < 0)
+		while(vars->player.angle < 0)
 			vars->player.angle += 2 *PI;
 	}
 	if(vars->move.key_r)
 	{
 		vars->player.angle += 0.05;
-		if(vars->player.angle > 2 * PI)
-			vars->player.angle -= 2 *PI;
+		if(vars->player.angle > (2 * PI))
+			vars->player.angle -= 2 * PI;
 	}
 }
 
