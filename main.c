@@ -8,6 +8,7 @@ int	main(int argc, char **argv)
 	if(argc < 2)
 		return(1);
 	ft_bzero(&vars, sizeof(t_all));
+	vars.player.angle = PI;
 	init_player(&vars);
 	if(!init_mlx(&vars, argc, argv) && !set_map(&vars, argv[1]))
 		mlx_loop(vars.win.mlx);	

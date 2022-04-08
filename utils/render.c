@@ -54,7 +54,10 @@ void move_p(t_all *vars)
 	change_angle(vars);
 	deltX = cos(vars->player.angle) * 0.1;
 	deltY = sin(vars->player.angle) * 0.1;
-	
+
+
+	init_player(vars);
+
 	vars->player.pos.x += deltX * vars->move.key_w;
 	vars->player.pos.y += deltY * vars->move.key_w;
 

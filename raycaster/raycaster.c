@@ -42,12 +42,12 @@ void raycaster(t_all *vars)
 		if (rayDir.x == 0)
 			deltaDist.x = 1e30;
 		else
-			deltaDist.x = fabs(1 / rayDir.x);
+			deltaDist.x = fabs(1.0 / rayDir.x);
 		
 		if (rayDir.y == 0)
 			deltaDist.y = 1e30;
 		else
-			deltaDist.y = fabs(1 / rayDir.y);
+			deltaDist.y = fabs(1.0 / rayDir.y);
 
 		// определяем sideDist x и y - расстояния от начальной клетки до первых сторон x и y
 		if (rayDir.x < 0)
@@ -85,17 +85,17 @@ void raycaster(t_all *vars)
 				map.y += step.y;
 				side = 1;
 			}
-			if (vars->map[map.x][map.y] == '1')
+			if (vars->map[map.y][map.x] == '1')
 				break;
 		}
 		// вычисляем расстояние от стены до плоскости, где находится игрок
 		if (side == 0)
-			perpWallDist = (sideDist.x - sideDist.y);
+			perpWallDist = (sideDist.x - deltaDist.x);
 		else
-			perpWallDist = (sideDist.y - sideDist.x);
+			perpWallDist = (sideDist.y - deltaDist.y);
 
 		// вычисляем высоту стены и координаты для отрисовки
-		lineHeight = (int) (vars->win.height / perpWallDist);
+		lineHeight = vars->win.height / perpWallDist;
 		drawStart = -lineHeight / 2 + vars->win.height / 2;
 		if (drawStart < 0)
 			drawStart = 0;
@@ -103,8 +103,10 @@ void raycaster(t_all *vars)
 		if (drawEnd >= vars->win.height)
 			drawEnd = vars->win.height - 1;
 
+
 		// рисуем стену
 		draw_ver_line(vars, x, drawStart, drawEnd);
+			printf("%f %f\n", vars->player.pos.x, vars->player.pos.y);
 
 		x++;
 	}
