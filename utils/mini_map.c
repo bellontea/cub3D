@@ -74,10 +74,10 @@ void line(t_point start, double dx, double dy, t_all *vars)
 	float	y;
 
 
-	x = vars->player.x;
-	y = vars->player.y;
-	dx += vars->player.x;
-	dy += vars->player.y;
+	x = vars->player.pos.x;
+	y = vars->player.pos.y;
+	dx += vars->player.pos.x;
+	dy += vars->player.pos.y;
 	point.z = 1;
 	while (x < dx || y < dy)
 	{
@@ -96,9 +96,9 @@ void set_player(t_point point, t_all * vars, int size)
 	float	temp;
 
 	// line(point, cos(vars->player.angle) * 5, sin(vars->player.angle) * 5, vars);
-	point.x += modff(vars->player.x - 0.2 , &temp) * point.z;
+	point.x += modff(vars->player.pos.x - 0.2 , &temp) * point.z;
 	point.x += temp * point.z;
-	point.y += modff(vars->player.y - 0.2, &temp) * point.z;
+	point.y += modff(vars->player.pos.y - 0.2, &temp) * point.z;
 	point.y += temp * point.z;
 	point.z = size / 2;
 	drow_sqr(point, create_trgb(0, 250, 0 , 0), vars->win.img);

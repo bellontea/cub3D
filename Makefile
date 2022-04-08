@@ -9,7 +9,7 @@ HEADER  	=	./includes/cub3d.h
 INC			=	/usr/include
 INCLIB		=	$(INC)/../lib
 
-SRCS_UTILS	=	$(shell ls ./utils/*.c)
+SRCS_UTILS	=	$(shell ls ./utils/*.c) $(shell ls ./raycaster/*.c)
 
 SRC			=	$(SRCS_UTILS) main.c
 OBJ			=	$(addprefix $(OBJ_DIR)/, $(SRC:.c=.o)) $(LIBFT)

@@ -20,7 +20,7 @@ int collision(t_all *vars)
 		x = -size_c;
 		while (x < size_c + 0.1)
 		{
-			if (vars->map[(int)(vars->player.y + y)][(int)(vars->player.x + x)] != '0')
+			if (vars->map[(int)(vars->player.pos.y + y)][(int)(vars->player.pos.x + x)] != '0')
 				return (1);
 			x += size_c;
 		}
@@ -55,17 +55,18 @@ void move_p(t_all *vars)
 	deltX = cos(vars->player.angle) * 0.1;
 	deltY = sin(vars->player.angle) * 0.1;
 	
-	vars->player.x += deltX * vars->move.key_w;
-	vars->player.y += deltY * vars->move.key_w;
+	vars->player.pos.x += deltX * vars->move.key_w;
+	vars->player.pos.y += deltY * vars->move.key_w;
 
-	vars->player.x -= deltX * vars->move.key_s;
-	vars->player.y -= deltY * vars->move.key_s;
+	vars->player.pos.x -= deltX * vars->move.key_s;
+	vars->player.pos.y -= deltY * vars->move.key_s;
 }
 
 int	render(t_all *vars)
 {
 	clear_screen(vars);
 	move_p(vars);
+	raycaster(vars);
 	// for (int i = 0; i < 10000; i++);
 	for(int i = 0; i < vars->win.iter % (int)WIN_HEIGHT; i++)
 		pixel_put(vars->win.img, i, 10, create_trgb(0, 255, 255, 255));

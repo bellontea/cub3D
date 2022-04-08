@@ -12,5 +12,7 @@ int init_mlx(t_all *vars, int argc, char **argv)
 	// mlx_mouse_hook(vars->win.win, mouse_hook, win);
 	mlx_hook(vars->win.win, 17, 0, close_win, vars);
 	mlx_loop_hook(vars->win.mlx, render, vars);
+	vars->win.width = WIN_WIDTH;
+	vars->win.height = WIN_HEIGHT;
 	return (0);
 }

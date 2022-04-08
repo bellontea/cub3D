@@ -41,21 +41,26 @@ typedef struct	s_win {
 	unsigned int	iter;
 }				t_win;
 
-typedef struct	s_point // структура для точки
+typedef struct	s_point // структура для точки int
 {
 	int	x;
 	int	y;
 	int	z;
 }				  t_point;
 
+typedef struct	s_dot // структура для точки double
+{
+	double	x;
+	double	y;
+}				  t_dot;
+
 typedef struct	s_player //структура для игрока и луча
 {
-	float	x;
-	float	y;
+	t_dot	pos;
+	t_dot	dir;
+	t_dot	plane;
 	float	angle;
-	float	dir;
-	float	start;
-	float	end;
+	
 }				  t_player;
 
 typedef struct	s_textures
@@ -97,5 +102,7 @@ void	pixel_put(t_image *data, int x, int y, int color);
 void	mini_map(t_all *vars);
 int		key_press(int key, t_all *vars);
 int	key_realease(int key, t_all *vars);
+int init_player(t_all *vars);
+void raycaster(t_all *vars);
 
 #endif
