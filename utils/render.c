@@ -31,13 +31,13 @@ int collision(t_all *vars)
 
 void	change_angle(t_all *vars)
 {
-	if(vars->move.key_l)
+	if(vars->move.key_r)
 	{
 		vars->player.angle -= 0.05;
 		while(vars->player.angle < 0)
 			vars->player.angle += 2 *PI;
 	}
-	if(vars->move.key_r)
+	if(vars->move.key_l)
 	{
 		vars->player.angle += 0.05;
 		if(vars->player.angle > (2 * PI))
@@ -63,6 +63,15 @@ void move_p(t_all *vars)
 
 	vars->player.pos.x -= deltX * vars->move.key_s;
 	vars->player.pos.y -= deltY * vars->move.key_s;
+	
+	deltX = cos(vars->player.angle - (PI /2)) * 0.1;
+	deltY = sin(vars->player.angle - (PI /2)) * 0.1;
+
+	vars->player.pos.x -= deltX * vars->move.key_a;
+	vars->player.pos.y -= deltY * vars->move.key_a;
+
+	vars->player.pos.x += deltX * vars->move.key_d;
+	vars->player.pos.y += deltY * vars->move.key_d;
 }
 
 int	render(t_all *vars)
