@@ -63,16 +63,6 @@ typedef struct	s_player //структура для игрока и луча
 	
 }				  t_player;
 
-typedef struct	s_textures
-{
-	int		no;
-	int		so;
-	int		we;
-	int		ea;
-	t_point	floor;
-	t_point	ceiling;
-}				t_textures;
-
 typedef struct	s_move
 {
 	int		key_w;
@@ -84,13 +74,16 @@ typedef struct	s_move
 }				t_move;
 
 typedef struct	s_texture {
-	char	*name;
+	char	*file_name;
+	int		width;
+	int		height;
+	int		**pic;
+
 }				t_texture;
 
 typedef struct	s_all {
 	t_win		win;
 	t_player	player;
-	t_textures	textures;
 	t_move		move;
 	t_texture	texture[4];
 	int			color_c;
