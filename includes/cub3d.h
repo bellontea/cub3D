@@ -21,6 +21,10 @@
 # define WIN_WIDTH	1000.L
 # define WIN_HEIGHT 1000.L
 # define SCALE 16 // условный размер каждого квадратика в карте
+# define NO 0
+# define SO 1
+# define WE 2
+# define EA 3
 
 // пока немного не пон че с текстурами делать, пока не буду
 
