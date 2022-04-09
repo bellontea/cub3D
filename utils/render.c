@@ -2,9 +2,23 @@
 
 void clear_screen(t_all *vars)
 {
-	mlx_destroy_image(vars->win.mlx, vars->win.img->img);
-	free(vars->win.img);
-	vars->win.img = init_new_img(vars->win.mlx);
+	int	x;
+	int	y;
+
+	y = 0;
+	while(y < WIN_HEIGHT)
+	{
+		x = 0;
+		while (x < WIN_WIDTH)
+		{
+			if (y < WIN_HEIGHT / 2)
+				pixel_put(vars->win.img, x, y, vars->color_c);
+			else
+				pixel_put(vars->win.img, x, y, vars->color_f);
+			x++;
+		}
+		y++;
+	}
 }
 
 int collision(t_all *vars, float _x, float _y)

@@ -2,23 +2,12 @@
 
 int max_len(char **map)
 {
-	int	max;
-	int	lenght;
 	int	i;
 
-	max = ft_strlen(map[0]);
 	i = 1;
 	while(map && map[i])
-	{
-		lenght = ft_strlen(map[i]);
-		if(lenght > max)
-			max = lenght;
 		i++;
-	}
-	i++;
-	if(i > max)
-		max = i;
-	return (max - 1);
+	return (i);
 }
 
 void mini_map(t_all *vars)
@@ -36,14 +25,14 @@ void mini_map(t_all *vars)
 	draw_vision(point, vars);
 	i = -1;
 	point.z = 5;
-	while (i * point.z < size)
-	{
-		point.y = WIN_HEIGHT - size + i * point.z;
-		point.x = size;
-		drow_sqr(point, create_trgb(0, 250, 110 , 5), vars->win.img);
-		point.y = WIN_HEIGHT - size - point.z;
-		point.x = i * point.z;
-		drow_sqr(point, create_trgb(0, 250, 110 , 5), vars->win.img);
-		i++;
-	}
+	// while (i * point.z < size)
+	// {
+	// 	point.y = WIN_HEIGHT - size + i * point.z;
+	// 	point.x = size;
+	// 	drow_sqr(point, create_trgb(0, 250, 110 , 5), vars->win.img);
+	// 	point.y = WIN_HEIGHT - size - point.z;
+	// 	point.x = i * point.z;
+	// 	drow_sqr(point, create_trgb(0, 250, 110 , 5), vars->win.img);
+	// 	i++;
+	// }
 }

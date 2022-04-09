@@ -112,20 +112,24 @@ int	set_player(t_all *vars, int y)
 	return (0);
 }
 
-int set_map(t_all *vars, char *file_name)
+int map_parcer(t_all *vars, char *file_name)
 {
 	int	file;
 	int	i;
 
 	file = open(file_name, O_RDONLY);
-	if (file == -1)
+	if (file == -1 || head_parcer(vars, file))
 		return (1);
 	i = 0;
-	do
+	vars->map = ft_calloc(2, sizeof(char *));
+	vars->map[i] = get_next_line(file);
+	while(vars->map[i] && !ft_isdigit(vars->map[i][0]))
 	{
-		vars->map = ft_realloc(vars->map, i * sizeof(char *),
-			(i + 1) * sizeof(char *));
+		free(vars->map[i]);
 		vars->map[i] = get_next_line(file);
+	}
+	while (vars->map[i])
+	{
 		if (set_player(vars, i))
 		{
 			close(file);
@@ -133,7 +137,10 @@ int set_map(t_all *vars, char *file_name)
 		}
 		add_space(vars->map + i);
 		i++;
-	}while (vars->map[i - 1]);
+		vars->map = ft_realloc(vars->map, i * sizeof(char *),
+			(i + 2) * sizeof(char *));
+		vars->map[i] = get_next_line(file);
+	}
 	close(file);
 	return (check_map(vars->map));
 }

@@ -10,6 +10,6 @@ int	main(int argc, char **argv)
 	ft_bzero(&vars, sizeof(t_all));
 	vars.player.angle = PI;
 	init_player(&vars);
-	if(!init_mlx(&vars, argc, argv) && !set_map(&vars, argv[1]))
+	if(!init_mlx(&vars, argc, argv) && !map_parcer(&vars, argv[1]))
 		mlx_loop(vars.win.mlx);	
 }

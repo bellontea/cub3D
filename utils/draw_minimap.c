@@ -59,7 +59,7 @@ void draw_minimap(t_point point, t_all * vars)
 	{
 		drow.x = point.x;
 		j = 0;
-		while(vars->map[i][j])
+		while(vars->map[i][j + 1])
 		{
 			drow_sqr(drow, get_color_minimap(vars->map[i][j]), vars->win.img);
 			drow.x += point.z;
