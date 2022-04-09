@@ -1,6 +1,6 @@
 #include "cub3d.h"
 
-int set_floor_color(t_all *vars, char *str)
+int set_clolor(t_all *vars, char *str)
 {
 	int	i;
 	int	count;
@@ -8,8 +8,6 @@ int set_floor_color(t_all *vars, char *str)
 
 	count = 0;
 	i = 0;
-	if (vars->color_f != -1)
-		return (1);
 	while(count < 3)
 	{
 		while(str[i] && ft_isspace(str[i]))
@@ -24,36 +22,28 @@ int set_floor_color(t_all *vars, char *str)
 			i++;
 	}
 	if (count == 3)
-		vars->color_f = create_trgb(0, color[0], color[1], color[2]);
-	return (count != 3);
+		return (create_trgb(0, color[0], color[1], color[2]));
+	return -1;
+}
+
+int set_floor_color(t_all *vars, char *str)
+{
+	if (vars->color_f != -1)
+		return (1);
+	vars->color_f = set_clolor(vars, str);
+	if (vars->color_c == -1)
+		return (1);
+	return (0);
 }
 
 int set_ceilling_color(t_all *vars, char *str)
 {
-	int	i;
-	int	count;
-	int	color[3];
-
-	count = 0;
-	i = 0;
 	if (vars->color_c != -1)
 		return (1);
-	while(count < 3)
-	{
-		while(str[i] && ft_isspace(str[i]))
-			i++;
-		if (!str[i] || !ft_isdigit(str[i]))
-			return 1;
-		color[count] = ft_atoi(str + i);
-		count++;
-		while(str[i] && ft_isdigit(str[i]))
-			i++;
-		if (str[i] == ',')
-			i++;
-	}
-	if (count == 3)
-		vars->color_c = create_trgb(0, color[0], color[1], color[2]);
-	return (count != 3);
+	vars->color_c = set_clolor(vars, str);
+	if (vars->color_c == -1)
+		return (1);
+	return (0);
 }
 
 int head_parcer(t_all *vars, int file)
