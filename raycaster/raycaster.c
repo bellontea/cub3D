@@ -106,7 +106,6 @@ void raycaster(t_all *vars)
 
 		// рисуем стену
 		draw_ver_line(vars, x, drawStart, drawEnd);
-			printf("%f %f\n", vars->player.pos.x, vars->player.pos.y);
 
 		x++;
 	}

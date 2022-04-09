@@ -111,5 +111,10 @@ void	draw_player(t_point point, t_all * vars);
 int	get_color_minimap(char ch);
 void draw_minimap(t_point point, t_all * vars);
 int head_parcer(t_all *vars, int file);
+void	*get_x_y(t_image *img, int x, int y);
+int	set_NO_texture(t_all *vars, char *str);
+int	set_SO_texture(t_all *vars, char *str);
+int	set_WE_texture(t_all *vars, char *str);
+int	set_EA_texture(t_all *vars, char *str);
 
 #endif

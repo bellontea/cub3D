@@ -50,7 +50,8 @@ int head_parcer(t_all *vars, int file)
 {
 	char		*str;
 	const char	*identifier[] = {"C", "F", "NO", "SO", "WE", "EA", NULL};
-	int			(*func[])(t_all *, char *) = {set_ceilling_color, set_floor_color};
+	int			(*func[])(t_all *, char *) = {set_ceilling_color, set_floor_color,
+			set_NO_texture, set_SO_texture, set_WE_texture, set_EA_texture};
 	int			count;
 	int			i;
 
@@ -58,7 +59,7 @@ int head_parcer(t_all *vars, int file)
 	vars->color_f = -1;
 	count = 0;
 	str = get_next_line(file);
-	while (count < 2 && str)
+	while (count < 6 && str)
 	{
 		i = 0;
 		while (identifier[i])
@@ -71,12 +72,11 @@ int head_parcer(t_all *vars, int file)
 					return (1);
 				}
 				count++;
-				break;
 			}
 			i++;
 		}
 		free(str);
 		str = get_next_line(file);
 	}
-	return (count != 2);
+	return (count != 6);
 }
