@@ -31,9 +31,9 @@ void mini_map(t_all *vars)
 	point.z = WIN_HEIGHT * 0.3 / max_len(vars->map);
 	size = point.z * max_len(vars->map);
 	point.y = WIN_HEIGHT - size;
-	set_minimap(point, vars);
-	set_player(point, vars);
-	set_vision(point, vars);
+	draw_minimap(point, vars);
+	draw_player(point, vars);
+	draw_vision(point, vars);
 	i = -1;
 	point.z = 5;
 	while (i * point.z < size)

@@ -84,6 +84,34 @@ int check_map(char **map)
 	return (0);
 }
 
+int	set_player(t_all *vars, int y)
+{
+	int i;
+	char *str;
+	char *directions = "ENWS";
+	char *temp;
+
+	str = vars->map[y];
+	if(!str)
+		return (0);
+	i = 0;
+	while (str[i])
+	{
+		temp = ft_strchr(directions, str[i]);
+		if(temp)
+		{
+			if (vars->player.pos.y != 0)
+				return 1;
+			vars->player.pos.y = y;
+			vars->player.pos.x = i;
+			vars->player.angle = (temp - directions) * (PI / 2);
+			str[i] = '0';
+		}
+		i++;
+	}
+	return (0);
+}
+
 int set_map(t_all *vars, char *file_name)
 {
 	int	file;
@@ -98,13 +126,10 @@ int set_map(t_all *vars, char *file_name)
 		vars->map = ft_realloc(vars->map, i * sizeof(char *),
 			(i + 1) * sizeof(char *));
 		vars->map[i] = get_next_line(file);
-		while (vars->map[i] && ft_strchr(vars->map[i], 'P'))
+		if (set_player(vars, i))
 		{
-			if (vars->player.pos.y != 0)
-				return 1;
-			vars->player.pos.y = i;
-			vars->player.pos.x = (ft_strchr(vars->map[i], 'P') - vars->map[i]);
-			ft_strchr(vars->map[i], 'P')[0]= '0';
+			close(file);
+			return (1);
 		}
 		add_space(vars->map + i);
 		i++;

@@ -106,9 +106,9 @@ int init_player(t_all *vars);
 void raycaster(t_all *vars);
 void DDA(t_point start, t_point end, int size, t_all *vars);
 void drow_sqr(t_point point, int color, t_image *img);
-void set_vision(t_point point, t_all * vars);
-void	set_player(t_point point, t_all * vars);
+void draw_vision(t_point point, t_all * vars);
+void	draw_player(t_point point, t_all * vars);
 int	get_color_minimap(char ch);
-void set_minimap(t_point point, t_all * vars);
+void draw_minimap(t_point point, t_all * vars);
 
 #endif
