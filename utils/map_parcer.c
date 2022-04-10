@@ -119,7 +119,10 @@ int map_parcer(t_all *vars, char *file_name)
 
 	file = open(file_name, O_RDONLY);
 	if (file == -1 || head_parcer(vars, file))
+	{
+		printf("error in file\n");
 		return (1);
+	}
 	i = 0;
 	vars->map = ft_calloc(2, sizeof(char *));
 	vars->map[i] = get_next_line(file);
@@ -132,6 +135,7 @@ int map_parcer(t_all *vars, char *file_name)
 	{
 		if (set_player(vars, i))
 		{
+			printf("error player set\n");
 			close(file);
 			return (1);
 		}

@@ -11,5 +11,5 @@ int get_color_minimap(char ch)
 		i++;
 	if(color_name[i])
 		return (color[i]);
-	return (color[0]);
+	return (-1);
 }
