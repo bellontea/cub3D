@@ -6,18 +6,15 @@ int	set_texture(t_all *vars, t_texture *texture)
 	int		j;
 	t_image	img;
 
-	if(texture->pic)
+	img.img = mlx_xpm_file_to_image(vars->win.mlx, texture->file_name,
+			&texture->width, &texture->height);
+	if (texture->pic || !img.img)
 		return (1);
-	img.img = mlx_xpm_file_to_image(vars->win.mlx, texture->file_name, &texture->width, &texture->height);
-	if(!img.img)
-	{
-		perror(texture->file_name);
-		return (1);
-	}
-	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_length, &img.endian);
+	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_length,
+			&img.endian);
 	texture->pic = ft_calloc(texture->height, sizeof(int *));
 	i = 0;
-	while(i < texture->height)
+	while (i < texture->height)
 	{
 		texture->pic[i] = ft_calloc(texture->height, sizeof(int));
 		j = 0;
@@ -28,12 +25,13 @@ int	set_texture(t_all *vars, t_texture *texture)
 		}
 		i++;
 	}
+	mlx_destroy_image(vars->win.mlx, img.img);
 	return (0);
 }
 
 int	set_NO_texture(t_all *vars, char *str)
 {
-	while(ft_isspace(*str))
+	while (ft_isspace(*str))
 		str++;
 	str[ft_strlen(str) - 1] = 0;
 	vars->texture[0].file_name = str;
@@ -42,7 +40,7 @@ int	set_NO_texture(t_all *vars, char *str)
 
 int	set_SO_texture(t_all *vars, char *str)
 {
-	while(ft_isspace(*str))
+	while (ft_isspace(*str))
 		str++;
 	str[ft_strlen(str) - 1] = 0;
 	vars->texture[1].file_name = str;
@@ -51,7 +49,7 @@ int	set_SO_texture(t_all *vars, char *str)
 
 int	set_WE_texture(t_all *vars, char *str)
 {
-	while(ft_isspace(*str))
+	while (ft_isspace(*str))
 		str++;
 	str[ft_strlen(str) - 1] = 0;
 	vars->texture[2].file_name = str;
@@ -60,7 +58,7 @@ int	set_WE_texture(t_all *vars, char *str)
 
 int	set_EA_texture(t_all *vars, char *str)
 {
-	while(ft_isspace(*str))
+	while (ft_isspace(*str))
 		str++;
 	str[ft_strlen(str) - 1] = 0;
 	vars->texture[3].file_name = str;

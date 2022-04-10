@@ -3,19 +3,18 @@
 
 void	key_move(int key, t_all *vars)
 {
-	if(key == KEY_A)
+	if (key == KEY_A)
 		vars->move.key_a = 1;
-	if(key == KEY_W)
+	if (key == KEY_W)
 		vars->move.key_w = 1;
-	if(key == KEY_D)
+	if (key == KEY_D)
 		vars->move.key_d = 1;
-	if(key == KEY_S)
+	if (key == KEY_S)
 		vars->move.key_s = 1;
-	if(key == KEY_LEFT)
+	if (key == KEY_LEFT)
 		vars->move.key_l = 1;
-	if(key == KEY_RIGHT)
+	if (key == KEY_RIGHT)
 		vars->move.key_r = 1;
-
 }
 
 int	key_press(int key, t_all *vars)

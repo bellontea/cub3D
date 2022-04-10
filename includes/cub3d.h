@@ -1,5 +1,5 @@
-#ifndef FRACTOL_H
-# define FRACTOL_H
+#ifndef CUB3D_H
+# define CUB3D_H
 
 # include <stdlib.h>
 # include <limits.h>
@@ -14,12 +14,11 @@
 # include <fcntl.h>  
 # include <stdio.h>
 
-
 # define US_INT unsigned short int
 
 # define PI 3.141592
-# define WIN_WIDTH	1000.L
-# define WIN_HEIGHT 1000.L
+# define WIN_WIDTH	1500
+# define WIN_HEIGHT 1000
 # define SCALE 16 // условный размер каждого квадратика в карте
 # define NO 0
 # define SO 1
@@ -28,46 +27,51 @@
 
 // пока немного не пон че с текстурами делать, пока не буду
 
-typedef struct	s_image {
+typedef struct s_steps
+{
+	double	x;
+	double	y;
+}			t_steps;
+
+typedef struct s_image {
 	void	*img;
 	char	*addr;
 	int		bits_per_pixel;
 	int		line_length;
 	int		endian;
-}				t_image;
+}			t_image;
 
-typedef struct	s_win {
-	void		*mlx;
-	void		*win;
-	int			width;
-	int			height;
-	t_image		*img;
+typedef struct s_win {
+	void			*mlx;
+	void			*win;
+	int				width;
+	int				height;
+	t_image			*img;
 	unsigned int	iter;
-}				t_win;
+}					t_win;
 
-typedef struct	s_point // структура для точки int
+typedef struct s_point // структура для точки int
 {
 	int	x;
 	int	y;
 	int	z;
-}				  t_point;
+}		t_point;
 
-typedef struct	s_dot // структура для точки double
+typedef struct s_dot // структура для точки double
 {
 	double	x;
 	double	y;
-}				  t_dot;
+}			t_dot;
 
-typedef struct	s_player //структура для игрока и луча
+typedef struct s_player //структура для игрока и луча
 {
 	t_dot	pos;
 	t_dot	dir;
 	t_dot	plane;
 	float	angle;
-	
-}				  t_player;
+}			t_player;
 
-typedef struct	s_move
+typedef struct s_move
 {
 	int		key_w;
 	int		key_a;
@@ -75,17 +79,16 @@ typedef struct	s_move
 	int		key_d;
 	int		key_l;
 	int		key_r;
-}				t_move;
+}			t_move;
 
-typedef struct	s_texture {
+typedef struct s_texture {
 	char	*file_name;
 	int		width;
 	int		height;
 	int		**pic;
+}			t_texture;
 
-}				t_texture;
-
-typedef struct	s_all {
+typedef struct s_all {
 	t_win		win;
 	t_player	player;
 	t_move		move;
@@ -105,20 +108,22 @@ int		map_parcer(t_all *vars, char *file_name);
 void	pixel_put(t_image *data, int x, int y, int color);
 void	mini_map(t_all *vars);
 int		key_press(int key, t_all *vars);
-int	key_realease(int key, t_all *vars);
-int init_player(t_all *vars);
-void raycaster(t_all *vars);
-void DDA(t_point start, t_point end, int size, t_all *vars);
-void drow_sqr(t_point point, int color, t_image *img);
-void draw_vision(t_point point, t_all * vars);
-void	draw_player(t_point point, t_all * vars);
-int	get_color_minimap(char ch);
-void draw_minimap(t_point point, t_all * vars);
-int head_parcer(t_all *vars, int file);
+int		key_realease(int key, t_all *vars);
+int		init_player(t_all *vars);
+void	raycaster(t_all *vars);
+void	DDA(t_point start, t_point end, int size, t_all *vars);
+void	drow_sqr(t_point point, int color, t_image *img);
+void	draw_vision(t_point point, t_all *vars);
+void	draw_player(t_point point, t_all *vars);
+int		get_color_minimap(char ch);
+void	draw_minimap(t_point point, t_all *vars);
+int		head_parcer(t_all *vars, int file);
 void	*get_x_y(t_image *img, int x, int y);
-int	set_NO_texture(t_all *vars, char *str);
-int	set_SO_texture(t_all *vars, char *str);
-int	set_WE_texture(t_all *vars, char *str);
-int	set_EA_texture(t_all *vars, char *str);
+int		set_NO_texture(t_all *vars, char *str);
+int		set_SO_texture(t_all *vars, char *str);
+int		set_WE_texture(t_all *vars, char *str);
+int		set_EA_texture(t_all *vars, char *str);
+int		set_player(t_all *vars, int y);
+int		check_map(char **map);
 
 #endif

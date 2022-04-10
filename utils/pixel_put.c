@@ -8,5 +8,5 @@ void	pixel_put(t_image *data, int x, int y, int color)
 		|| x >= WIN_HEIGHT || y >= WIN_WIDTH)
 		return ;
 	dst = data->addr + (y * data->line_length + x * (data->bits_per_pixel / 8));
-	*(unsigned int*)dst = color;
+	*(unsigned int *)dst = color;
 }
