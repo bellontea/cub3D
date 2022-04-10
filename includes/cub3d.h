@@ -25,6 +25,8 @@
 # define SO 1
 # define WE 2
 # define EA 3
+# define X_SIDE 0
+# define Y_SIDE 1
 
 // пока немного не пон че с текстурами делать, пока не буду
 
@@ -63,6 +65,16 @@ typedef struct	s_player //структура для игрока и луча
 	t_dot	pos;
 	t_dot	dir;
 	t_dot	plane;
+	t_dot	rayDir;
+	t_point currRayOnMap;
+	t_dot sideDist;
+	t_dot deltaDist;
+	int side;
+	t_point step;
+	double planeWallDist;
+	int drawStart;
+	int drawEnd;
+	int lineHeight;
 	float	angle;
 	
 }				  t_player;
