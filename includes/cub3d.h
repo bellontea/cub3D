@@ -17,7 +17,7 @@
 # define US_INT unsigned short int
 
 # define PI 3.141592
-# define WIN_WIDTH	1500
+# define WIN_WIDTH	1000
 # define WIN_HEIGHT 1000
 # define SCALE 16 // условный размер каждого квадратика в карте
 # define NO 0
@@ -137,5 +137,7 @@ int		set_WE_texture(t_all *vars, char *str);
 int		set_EA_texture(t_all *vars, char *str);
 int		set_player(t_all *vars, int y);
 int		check_map(char **map);
+void init_ray_vars(t_all *vars, int x);
+void	rayDDA(t_all *vars);
 
 #endif
