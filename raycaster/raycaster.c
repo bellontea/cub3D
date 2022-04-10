@@ -23,6 +23,7 @@ void raycaster(t_all *vars)
 	int lineHeight;
 	int drawStart;
 	int drawEnd;
+	int texNum;
 
 	while (x < vars->win.width)
 	{
@@ -103,9 +104,45 @@ void raycaster(t_all *vars)
 		if (drawEnd >= vars->win.height)
 			drawEnd = vars->win.height - 1;
 
+		// Определяем текстуру
+		if (side == 0)
+		{
+			if (vars->player.pos.x < map.x)
+				texNum = EA;
+			else
+				texNum = WE;
+		}
+		else
+		{
+			if (vars->player.pos.y < map.y)
+				texNum = SO;
+			else
+				texNum = NO;
+		}
 
-		// рисуем стену
-		draw_ver_line(vars, x, drawStart, drawEnd);
+		double wallX;
+		if (side == 0)
+			wallX = vars->player.pos.y + perpWallDist * rayDir.y;
+		else
+			wallX = vars->player.pos.x + perpWallDist * rayDir.x;
+		wallX -= floor((wallX));
+
+		int texX = (int)(wallX * (double)(vars->texture->width));
+		if(side == 0 && rayDir.x > 0) texX = vars->texture->width - texX - 1;
+		if(side == 1 && rayDir.y < 0) texX = vars->texture->width - texX - 1;
+
+		double step = 1.0 * vars->texture->height / lineHeight;
+		double texPos = (drawStart - vars->win.height / 2 + lineHeight / 2) * step;
+		for(int y = drawStart; y < drawEnd; y++)
+		{
+			int texY = (int)texPos & (vars->texture->height - 1);
+			texPos += step;
+			int color = vars->texture[texNum].pic[texX][texY];
+			pixel_put(vars->win.img, x, y, color);
+		}
+
+		// // рисуем стену
+		// draw_ver_line(vars, x, drawStart, drawEnd);
 
 		x++;
 	}
