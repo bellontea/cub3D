@@ -1,4 +1,4 @@
-NAME		=	cub3d
+NAME		=	cub3D
 
 LIBFT		=	./libft_gnl/libft_gnl.a
 PATH_HEADER =	./includes/
