@@ -6,7 +6,7 @@
 /*   By: tjamis <tjamis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/11 16:29:36 by tjamis            #+#    #+#             */
-/*   Updated: 2022/04/11 16:34:44 by tjamis           ###   ########.fr       */
+/*   Updated: 2022/04/11 18:56:38 by tjamis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ void	dda(t_point start, t_point end, int size, t_all *vars)
 	t_steps	steps;
 	double	x;
 	double	y;
-
 	current = start;
 	current.z = size;
 	x = (double)current.x;
@@ -37,7 +36,7 @@ void	dda(t_point start, t_point end, int size, t_all *vars)
 	steps.y = (double)(end.y - start.y) / (double)ft_max(delta.x, delta.y);
 	while ((int)(end.x - x) || (int)(end.y - y))
 	{
-		drow_sqr(current, create_trgb(0, 250, 0, 0), vars->win.img);
+		drow_sqr(current, create_trgb(0, 238, 130, 238), vars->win.img);
 		x += steps.x;
 		y += steps.y;
 		current.x = (int)x;

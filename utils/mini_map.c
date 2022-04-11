@@ -6,7 +6,7 @@
 /*   By: tjamis <tjamis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/11 16:30:11 by tjamis            #+#    #+#             */
-/*   Updated: 2022/04/11 18:35:26 by tjamis           ###   ########.fr       */
+/*   Updated: 2022/04/11 18:59:07 by tjamis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,8 @@ void	mini_map(t_all *vars)
 	size = point.z * max_len(vars->map);
 	point.y = WIN_HEIGHT - size;
 	draw_minimap(point, vars);
-	draw_player(point, vars);
 	draw_vision(point, vars);
+	draw_player(point, vars);
 	i = -1;
 	point.z = 5;
 }
