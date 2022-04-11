@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   dda.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tjamis <tjamis@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mslyther <mslyther@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/11 16:29:36 by tjamis            #+#    #+#             */
-/*   Updated: 2022/04/11 18:56:38 by tjamis           ###   ########.fr       */
+/*   Updated: 2022/04/11 19:27:54 by mslyther         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ void	dda(t_point start, t_point end, int size, t_all *vars)
 	t_steps	steps;
 	double	x;
 	double	y;
+
 	current = start;
 	current.z = size;
 	x = (double)current.x;
