@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_mlx.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tjamis <tjamis@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mslyther <mslyther@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/11 16:29:55 by tjamis            #+#    #+#             */
-/*   Updated: 2022/04/11 16:29:56 by tjamis           ###   ########.fr       */
+/*   Updated: 2022/04/11 20:06:53 by mslyther         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,5 @@ int	init_mlx(t_all *vars, int argc, char **argv)
 	mlx_hook(vars->win.win, 3, 1L << 1, key_realease, vars);
 	mlx_hook(vars->win.win, 17, 0, close_win, vars);
 	mlx_loop_hook(vars->win.mlx, render, vars);
-	vars->win.width = WIN_WIDTH;
-	vars->win.height = WIN_HEIGHT;
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: tjamis <tjamis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/11 16:33:32 by tjamis            #+#    #+#             */
-/*   Updated: 2022/04/11 20:03:52 by tjamis           ###   ########.fr       */
+/*   Updated: 2022/04/11 20:13:00 by tjamis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@
 # define US_INT unsigned short int
 
 # define PI 3.141592
-# define WIN_WIDTH	1000
+# define WIN_WIDTH	1500
 # define WIN_HEIGHT 1000
 # define SCALE 16 // условный размер каждого квадратика в карте
 # define NO 0
@@ -58,8 +58,6 @@ typedef struct s_image {
 typedef struct s_win {
 	void			*mlx;
 	void			*win;
-	int				width;
-	int				height;
 	t_image			*img;
 	unsigned int	iter;
 }					t_win;
@@ -82,16 +80,16 @@ typedef struct s_player //структура для игрока и луча
 	t_dot	pos;
 	t_dot	dir;
 	t_dot	plane;
-	t_dot	rayDir;
-	t_point	currRayOnMap;
-	t_dot	sideDist;
-	t_dot	deltaDist;
+	t_dot	ray_dir;
+	t_point	curr_ray_on_map;
+	t_dot	side_dist;
+	t_dot	delta_dist;
 	int		side;
 	t_point	step;
-	double	planeWallDist;
-	int		drawStart;
-	int		drawEnd;
-	int		lineHeight;
+	double	plane_wall_dist;
+	int		draw_start;
+	int		draw_end;
+	int		line_height;
 	float	angle;
 }			t_player;
 
@@ -149,8 +147,12 @@ int		set_we_texture(t_all *vars, char *str);
 int		set_ea_texture(t_all *vars, char *str);
 int		set_player(t_all *vars, int y);
 int		check_map(char **map);
-void	init_ray_vars(t_all *vars, int x);
-void	rayDDA(t_all *vars);
+void	init_ray_vars(t_player *plr, int x);
+void	ray_dda(t_all *vars);
+void	calculate_borders(t_player *plr);
+void	draw_ver_line(t_all *vars, int x, int tex_x, t_texture tex);
+int		calculate_tex_x(t_player plr, t_texture tex);
+int		define_texture(t_player plr);
 void	*init_head_parcer(t_all *vars);
 int		set_ceilling_color(t_all *vars, char *str);
 int		set_floor_color(t_all *vars, char *str);

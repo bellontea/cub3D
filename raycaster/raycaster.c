@@ -1,157 +1,121 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   raycaster.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mslyther <mslyther@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/04/11 19:04:44 by mslyther          #+#    #+#             */
+/*   Updated: 2022/04/11 20:01:05 by mslyther         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub3d.h"
 
 /*
-- Вычисление расстояния от начальной клетки до первых сторон x и y (sideDist)
+- Вычисление расстояния от начальной клетки до первых сторон x и y (side_dist)
 */
-void init_sideDist(t_all *vars)
+void	init_side_dist(t_player *plr)
 {
-	if (vars->player.rayDir.x < 0)
+	if (plr->ray_dir.x < 0)
 	{
-		vars->player.step.x = -1;
-		vars->player.sideDist.x = (vars->player.pos.x - vars->player.currRayOnMap.x) * vars->player.deltaDist.x;
+		plr->step.x = -1;
+		plr->side_dist.x = (plr->pos.x - plr->curr_ray_on_map.x)
+			* plr->delta_dist.x;
 	}
 	else
 	{
-		vars->player.step.x = 1;
-		vars->player.sideDist.x = (vars->player.currRayOnMap.x + 1.0 - vars->player.pos.x) * vars->player.deltaDist.x;
+		plr->step.x = 1;
+		plr->side_dist.x = (plr->curr_ray_on_map.x + 1.0 - plr->pos.x)
+			* plr->delta_dist.x;
 	}
-	if (vars->player.rayDir.y < 0)
+	if (plr->ray_dir.y < 0)
 	{
-		vars->player.step.y = -1;
-		vars->player.sideDist.y = (vars->player.pos.y - vars->player.currRayOnMap.y) * vars->player.deltaDist.y;
+		plr->step.y = -1;
+		plr->side_dist.y = (plr->pos.y - plr->curr_ray_on_map.y)
+			* plr->delta_dist.y;
 	}
 	else
 	{
-		vars->player.step.y = 1;
-		vars->player.sideDist.y = (vars->player.currRayOnMap.y + 1.0 - vars->player.pos.y) * vars->player.deltaDist.y;
+		plr->step.y = 1;
+		plr->side_dist.y = (plr->curr_ray_on_map.y + 1.0 - plr->pos.y)
+			* plr->delta_dist.y;
 	}
 }
 
 /*
-- Вычисление координат верктора луча (rayDir)
-- Вычисление координат клетки, в которой находится луч в текущий момент (currRayOnMap)
-- Вычичсление длины луча до следующей стороны x или y (deltaDist)
-- Вычисление расстояния от начальной клетки до первых сторон x и y (sideDist)
+- Вычисление координат верктора луча (ray_dir)
+- Вычисление координат клетки, в которой находится луч в 
+  текущий момент (curr_ray_on_map)
+- Вычичсление длины луча до следующей стороны x или y (delta_dist)
+- Вычисление расстояния от начальной клетки до первых сторон x и y (side_dist)
 */
-void init_ray_vars(t_all *vars, int x)
+void	init_ray_vars(t_player *plr, int x)
 {
-	double	cameraX;
+	double	camera_x;
 
-	cameraX = 2 * x / (double) WIN_WIDTH - 1;
-	vars->player.rayDir.x = vars->player.dir.x + vars->player.plane.x * cameraX;
-	vars->player.rayDir.y = vars->player.dir.y + vars->player.plane.y * cameraX;
-	vars->player.currRayOnMap.x = (int) vars->player.pos.x;
-	vars->player.currRayOnMap.y = (int) vars->player.pos.y;
-	if (vars->player.rayDir.x == 0)
-		vars->player.deltaDist.x = 1e30;
+	camera_x = 2 * x / (double) WIN_WIDTH - 1;
+	plr->ray_dir.x = plr->dir.x + plr->plane.x * camera_x;
+	plr->ray_dir.y = plr->dir.y + plr->plane.y * camera_x;
+	plr->curr_ray_on_map.x = (int) plr->pos.x;
+	plr->curr_ray_on_map.y = (int) plr->pos.y;
+	if (plr->ray_dir.x == 0)
+		plr->delta_dist.x = 1e30;
 	else
-		vars->player.deltaDist.x = fabs(1.0 / vars->player.rayDir.x);
-	if (vars->player.rayDir.y == 0)
-		vars->player.deltaDist.y = 1e30;
+		plr->delta_dist.x = fabs(1.0 / plr->ray_dir.x);
+	if (plr->ray_dir.y == 0)
+		plr->delta_dist.y = 1e30;
 	else
-		vars->player.deltaDist.y = fabs(1.0 / vars->player.rayDir.y);
-	init_sideDist(vars);
+		plr->delta_dist.y = fabs(1.0 / plr->ray_dir.y);
+	init_side_dist(plr);
 }
 
 /*
 - DDA алгоритм: идем по лучу, пока не врежемся в стену
-- Вычисление расстояния от стены до плоскости камеры (planeWallDist)
+- Вычисление расстояния от стены до плоскости камеры (plane_wall_dist)
 */
-void	rayDDA(t_all *vars)
+void	ray_dda(t_all *vars)
 {
 	while (1)
 	{
-		if (vars->player.sideDist.x < vars->player.sideDist.y)
+		if (vars->player.side_dist.x < vars->player.side_dist.y)
 		{
-			vars->player.sideDist.x += vars->player.deltaDist.x;
-			vars->player.currRayOnMap.x += vars->player.step.x;
+			vars->player.side_dist.x += vars->player.delta_dist.x;
+			vars->player.curr_ray_on_map.x += vars->player.step.x;
 			vars->player.side = X_SIDE;
 		}
 		else
 		{
-			vars->player.sideDist.y += vars->player.deltaDist.y;
-			vars->player.currRayOnMap.y += vars->player.step.y;
+			vars->player.side_dist.y += vars->player.delta_dist.y;
+			vars->player.curr_ray_on_map.y += vars->player.step.y;
 			vars->player.side = Y_SIDE;
 		}
-		if (vars->map[vars->player.currRayOnMap.y][vars->player.currRayOnMap.x] == '1')
+		if (vars->map[vars->player.curr_ray_on_map.y]
+			[vars->player.curr_ray_on_map.x] == '1')
 			break ;
 	}
 	if (vars->player.side == X_SIDE)
-		vars->player.planeWallDist = (vars->player.sideDist.x - vars->player.deltaDist.x);
+		vars->player.plane_wall_dist = (vars->player.side_dist.x
+				- vars->player.delta_dist.x);
 	else
-		vars->player.planeWallDist = (vars->player.sideDist.y - vars->player.deltaDist.y);
+		vars->player.plane_wall_dist = (vars->player.side_dist.y
+				- vars->player.delta_dist.y);
 }
 
-int	define_texture(t_player plr)
+void	raycaster(t_all *vars)
 {
-	if (plr.side == X_SIDE)
-	{
-		if (plr.pos.x < plr.currRayOnMap.x)
-			return (EA);
-		return (WE);
-	}
-	if (plr.pos.y < plr.currRayOnMap.y)
-		return (SO);
-	return (NO);
-}
-
-int calculate_texX(t_player plr, t_texture tex)
-{
-	double wallX;
-	int texX;
-
-	if (plr.side == X_SIDE)
-		wallX = plr.pos.y + plr.planeWallDist * plr.rayDir.y;
-	else
-		wallX = plr.pos.x + plr.planeWallDist * plr.rayDir.x;
-	wallX -= floor((wallX));
-	texX = (int)(wallX * (double)(tex.width));
-	if ((plr.side == X_SIDE && plr.rayDir.x > 0) || (plr.side == Y_SIDE && plr.rayDir.y < 0)) 
-		texX = tex.width - texX - 1;
-	return (texX);
-}
-
-void draw_ver_line(t_all *vars, int x, int texX, t_texture tex)
-{
-	double step;
-	double texPos;
-	int texY;
-
-	step = 1.0 * tex.height / vars->player.lineHeight;
-	texPos = (vars->player.drawStart - WIN_HEIGHT / 2 + vars->player.lineHeight / 2) * step;
-	for(int y = vars->player.drawStart; y < vars->player.drawEnd; y++)
-	{
-		texY = (int)texPos & (tex.height - 1);
-		texPos += step;
-		pixel_put(vars->win.img, x, y, tex.pic[texX][texY]);
-	}
-}
-
-void calculate_borders(t_player *plr)
-{
-	plr->lineHeight = WIN_HEIGHT / plr->planeWallDist;
-	plr->drawStart = -(plr->lineHeight) / 2 + WIN_HEIGHT / 2;
-	if (plr->drawStart < 0)
-		plr->drawStart = 0;
-	plr->drawEnd = plr->lineHeight / 2 + WIN_HEIGHT / 2;
-	if (plr->drawEnd >= WIN_HEIGHT)
-		plr->drawEnd = WIN_HEIGHT - 1;
-
-}
-
-void raycaster(t_all *vars)
-{
-	int x;
-	int texNum;
+	int	x;
+	int	tex_num;
 
 	x = 0;
-	while (x < vars->win.width)
+	while (x < WIN_WIDTH)
 	{
-		init_ray_vars(vars, x);
-		rayDDA(vars);
+		init_ray_vars(&(vars->player), x);
+		ray_dda(vars);
 		calculate_borders(&(vars->player));
-		texNum = define_texture(vars->player);
-		draw_ver_line(vars, x, calculate_texX(vars->player, vars->texture[texNum]), vars->texture[texNum]);
+		tex_num = define_texture(vars->player);
+		draw_ver_line(vars, x, calculate_tex_x(vars->player,
+				vars->texture[tex_num]), vars->texture[tex_num]);
 		x++;
 	}
 }

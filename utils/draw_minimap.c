@@ -3,14 +3,38 @@
 /*                                                        :::      ::::::::   */
 /*   draw_minimap.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tjamis <tjamis@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mslyther <mslyther@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/11 16:29:39 by tjamis            #+#    #+#             */
-/*   Updated: 2022/04/11 19:00:07 by tjamis           ###   ########.fr       */
+/*   Updated: 2022/04/11 19:50:13 by mslyther         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+t_point	count_end(t_player plr, t_point point)
+{
+	double	delta;
+	t_point	end;
+
+	if (plr.side == Y_SIDE)
+	{
+		delta = plr.pos.x + plr.plane_wall_dist * plr.ray_dir.x;
+		if (plr.curr_ray_on_map.y < plr.pos.y)
+			plr.curr_ray_on_map.y++;
+		end.x = point.x + delta * point.z;
+		end.y = point.y - (plr.curr_ray_on_map.y - 1) * point.z;
+	}
+	else
+	{
+		delta = plr.pos.y + plr.plane_wall_dist * plr.ray_dir.y;
+		if (plr.curr_ray_on_map.x < plr.pos.x)
+			plr.curr_ray_on_map.x++;
+		end.x = point.x + plr.curr_ray_on_map.x * point.z;
+		end.y = point.y - (delta - 1) * point.z;
+	}
+	return (end);
+}
 
 void	draw_vision(t_point point, t_all *vars)
 {
@@ -28,32 +52,15 @@ void	draw_vision(t_point point, t_all *vars)
 	point.y -= point.z;
 	start.x = point.x + vars->player.pos.x * point.z;
 	start.y = point.y - (vars->player.pos.y - 1) * point.z;
-	int x = 0;
-	double delta;
-	while (x < WIN_WIDTH)
+	i = 0;
+	while (i < WIN_WIDTH)
 	{
-		init_ray_vars(vars, x);
-		rayDDA(vars);
-		if (vars->player.side == Y_SIDE)
-		{
-			delta = vars->player.planeWallDist * vars->player.rayDir.x;
-			if (vars->player.currRayOnMap.y < vars->player.pos.y)
-				vars->player.currRayOnMap.y++;
-			end.x = point.x + (vars->player.pos.x + delta) * point.z;
-			end.y = point.y - (vars->player.currRayOnMap.y - 1) * point.z;
-		}
-		else
-		{
-			delta = vars->player.planeWallDist * vars->player.rayDir.y;
-			if (vars->player.currRayOnMap.x < vars->player.pos.x)
-				vars->player.currRayOnMap.x++;
-			end.x = point.x + vars->player.currRayOnMap.x * point.z;
-			end.y = point.y - ((vars->player.pos.y + delta) - 1) * point.z;
-		}
+		init_ray_vars(&(vars->player), i);
+		ray_dda(vars);
+		end = count_end(vars->player, point);
 		dda(start, end, point.z / 5, vars);
-		x += 10;
+		i += 10;
 	}
-	
 }
 
 void	draw_player(t_point point, t_all *vars)
@@ -71,7 +78,7 @@ void	draw_player(t_point point, t_all *vars)
 	point.x += (vars->player.pos.x - 0.15) * point.z;
 	point.y -= (vars->player.pos.y - 0.7) * point.z;
 	point.z /= 2;
-	drow_sqr(point, create_trgb(0, 138, 43 , 226), vars->win.img);
+	drow_sqr(point, create_trgb(0, 138, 43, 226), vars->win.img);
 }
 
 void	draw_minimap(t_point point, t_all *vars)
