@@ -6,7 +6,7 @@
 /*   By: tjamis <tjamis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/11 16:29:49 by tjamis            #+#    #+#             */
-/*   Updated: 2022/04/11 21:09:34 by tjamis           ###   ########.fr       */
+/*   Updated: 2022/04/11 21:14:10 by tjamis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ char	*skip_space(int file)
 			i++;
 		if (temp[i])
 			return (str);
+		free(str);
 		str = get_next_line(file);
 	}
 	return (str);
