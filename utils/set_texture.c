@@ -6,7 +6,7 @@
 /*   By: tjamis <tjamis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/11 16:30:25 by tjamis            #+#    #+#             */
-/*   Updated: 2022/04/11 17:54:56 by tjamis           ###   ########.fr       */
+/*   Updated: 2022/04/11 19:39:21 by tjamis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	set_texture(t_all *vars, t_texture *texture)
 
 	img.img = mlx_xpm_file_to_image(vars->win.mlx, texture->file_name,
 			&texture->width, &texture->height);
-	if (texture->pic || !img.img)
+	if (texture->pic || !img.img || texture->height != texture->width)
 		return (1);
 	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_length,
 			&img.endian);

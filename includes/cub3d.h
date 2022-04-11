@@ -6,7 +6,7 @@
 /*   By: tjamis <tjamis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/11 16:33:32 by tjamis            #+#    #+#             */
-/*   Updated: 2022/04/11 18:22:10 by tjamis           ###   ########.fr       */
+/*   Updated: 2022/04/11 20:03:52 by tjamis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -154,5 +154,6 @@ void	rayDDA(t_all *vars);
 void	*init_head_parcer(t_all *vars);
 int		set_ceilling_color(t_all *vars, char *str);
 int		set_floor_color(t_all *vars, char *str);
+int		check_name_file(char *str);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: tjamis <tjamis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/11 16:30:08 by tjamis            #+#    #+#             */
-/*   Updated: 2022/04/11 18:09:05 by tjamis           ###   ########.fr       */
+/*   Updated: 2022/04/11 20:04:00 by tjamis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,16 @@ void	add_space(char **str)
 		str[0][i] = ' ';
 		tmp = ft_strchr(str[0], '\t');
 	}
+}
+
+int	check_name_file(char *str)
+{
+	char	*tmp;
+
+	tmp = ft_strnstr(str, ".cub", ft_strlen(str));
+	while (tmp && tmp[4])
+		tmp = ft_strnstr(tmp + 1, ".cub", ft_strlen(str));
+	return (tmp == NULL);
 }
 
 void	skip_empty(t_all *vars, int file)
@@ -76,7 +86,6 @@ int	map_parcer(t_all *vars, char *file_name)
 		add_space(vars->map + i);
 		if (set_player(vars, i))
 		{
-			printf("error player set\n");
 			close(file);
 			return (1);
 		}
