@@ -6,97 +6,70 @@
 /*   By: tjamis <tjamis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/11 16:29:49 by tjamis            #+#    #+#             */
-/*   Updated: 2022/04/11 20:40:44 by tjamis           ###   ########.fr       */
+/*   Updated: 2022/04/11 21:09:34 by tjamis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int	get_color(char *str, int *i, int count, int *color)
+char	*skip_space(int file)
 {
-	while (str[*i] && ft_isspace(str[*i]))
-		(*i)++;
-	if (!str[*i] || !ft_isdigit(str[*i]))
-		return (-1);
-	color[count] = ft_atoi(str + *i);
-	if (color[count] >= 255 || color[count] < 0)
-		return (-1);
-	return (0);
-}
+	char	*str;
+	char	*temp;
+	int		i;
 
-int	set_color( char *str)
-{
-	int	i;
-	int	count;
-	int	color[3];
-
-	count = 0;
-	i = 0;
-	while (count < 3)
+	str = get_next_line(file);
+	while (str)
 	{
-		if (get_color(str, &i, count, color))
-			return (-1);
-		count++;
-		while (str[i] && ft_isdigit(str[i]))
+		temp = str;
+		i = 0;
+		while (temp[i] && ft_isspace(temp[i]))
 			i++;
-		while (str[i] && ft_isspace(str[i]))
-			i++;
-		if (str[i] && str[i] == ',')
-			i++;
-		else if (count < 3)
-			return (-1);
+		if (temp[i])
+			return (str);
+		str = get_next_line(file);
 	}
-	while (str[i] && ft_isspace(str[i]))
+	return (str);
+}
+
+int	check_key(char *str, int count, t_all *vars)
+{
+	const char	*identifier[] = {"C", "F", "NO", "SO", "WE", "EA", NULL};
+	int			(**func)(t_all *, char *);
+	int			i;
+
+	func = init_head_parcer();
+	i = 0;
+	while (identifier[i])
+	{
+		if (!ft_strncmp(identifier[i], str, ft_strlen(identifier[i])))
+		{
+			count += 1 + func[i](vars, str + ft_strlen(identifier[i])) * 10;
+			break ;
+		}
 		i++;
-	if (count == 3 && !str[i])
-		return (create_trgb(0, color[0], color[1], color[2]));
-	return (-1);
-}
-
-int	set_floor_color(t_all *vars, char *str)
-{
-	if (vars->color_f != -1)
-		return (1);
-	vars->color_f = set_color(str);
-	if (vars->color_f == -1)
-		return (1);
-	return (0);
-}
-
-int	set_ceilling_color(t_all *vars, char *str)
-{
-	if (vars->color_c != -1)
-		return (1);
-	vars->color_c = set_color(str);
-	if (vars->color_c == -1)
-		return (1);
-	return (0);
+	}
+	free(func);
+	if (identifier[i])
+		return (count);
+	return (100);
 }
 
 int	head_parcer(t_all *vars, int file)
 {
 	char		*str;
-	const char	*identifier[] = {"C", "F", "NO", "SO", "WE", "EA", NULL};
-	int			(**func)(t_all *, char *);
 	int			count;
-	int			i;
 
 	count = 0;
-	func = init_head_parcer(vars);
-	str = get_next_line(file);
+	vars->color_c = -1;
+	vars->color_f = -1;
+	str = skip_space(file);
 	while (count < 6 && str)
 	{
-		i = 0;
-		while (identifier[i])
-		{
-			if (!ft_strncmp(identifier[i], str, ft_strlen(identifier[i])))
-				count += 1 + func[i](vars, str + ft_strlen(identifier[i])) * 10;
-			i++;
-		}
+		count = check_key(str, count, vars);
 		free(str);
 		if (count < 6)
-			str = get_next_line(file);
+			str = skip_space(file);
 	}
-	free(func);
 	return (count != 6);
 }

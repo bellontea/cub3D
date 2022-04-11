@@ -6,7 +6,7 @@
 /*   By: tjamis <tjamis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/11 16:33:32 by tjamis            #+#    #+#             */
-/*   Updated: 2022/04/11 20:13:00 by tjamis           ###   ########.fr       */
+/*   Updated: 2022/04/11 21:01:56 by tjamis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -153,9 +153,11 @@ void	calculate_borders(t_player *plr);
 void	draw_ver_line(t_all *vars, int x, int tex_x, t_texture tex);
 int		calculate_tex_x(t_player plr, t_texture tex);
 int		define_texture(t_player plr);
-void	*init_head_parcer(t_all *vars);
+void	*init_head_parcer(void);
 int		set_ceilling_color(t_all *vars, char *str);
 int		set_floor_color(t_all *vars, char *str);
 int		check_name_file(char *str);
+int		set_ceilling_color(t_all *vars, char *str);
+int		set_floor_color(t_all *vars, char *str);
 
 #endif
