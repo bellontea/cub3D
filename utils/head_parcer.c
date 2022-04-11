@@ -6,7 +6,7 @@
 /*   By: tjamis <tjamis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/11 16:29:49 by tjamis            #+#    #+#             */
-/*   Updated: 2022/04/11 20:16:45 by tjamis           ###   ########.fr       */
+/*   Updated: 2022/04/11 20:40:44 by tjamis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,9 +89,8 @@ int	head_parcer(t_all *vars, int file)
 		i = 0;
 		while (identifier[i])
 		{
-			if (!ft_strncmp(identifier[i], str, ft_strlen(identifier[i]))
-				&& !func[i](vars, str + ft_strlen(identifier[i])))
-				count++;
+			if (!ft_strncmp(identifier[i], str, ft_strlen(identifier[i])))
+				count += 1 + func[i](vars, str + ft_strlen(identifier[i])) * 10;
 			i++;
 		}
 		free(str);
