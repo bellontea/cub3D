@@ -33,7 +33,7 @@ run_libft:
 			@make -sC ./mlx
 			@make -sC $(PATH_LIB)
 
-$(OBJ_DIR)/%.o: %.c $(PATH_HEADER)*
+$(OBJ_DIR)/%.o: %.c $(PATH_HEADER)* mlx/*.a mlx/*.c mlx/*.h
 			@mkdir -p $(dir $@)
 			$(CC) $(CFLAGS) -c $< -o $@
 
