@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   map_parcer.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tjamis <tjamis@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/04/11 16:30:08 by tjamis            #+#    #+#             */
+/*   Updated: 2022/04/11 18:09:05 by tjamis           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub3d.h"
 
 void	add_space(char **str)
@@ -61,18 +73,18 @@ int	map_parcer(t_all *vars, char *file_name)
 	skip_empty(vars, file);
 	while (vars->map[i])
 	{
+		add_space(vars->map + i);
 		if (set_player(vars, i))
 		{
 			printf("error player set\n");
 			close(file);
 			return (1);
 		}
-		add_space(vars->map + i);
 		i++;
 		vars->map = ft_realloc(vars->map, i * sizeof(char *),
 				(i + 2) * sizeof(char *));
 		vars->map[i] = get_next_line(file);
 	}
 	close(file);
-	return (check_map(vars->map));
+	return (vars->player.pos.y == 0 || check_map(vars->map));
 }

@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   draw_minimap.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tjamis <tjamis@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/04/11 16:29:39 by tjamis            #+#    #+#             */
+/*   Updated: 2022/04/11 17:29:40 by tjamis           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub3d.h"
 
-void	draw_vision(t_point point, t_all * vars)
+void	draw_vision(t_point point, t_all *vars)
 {
 	t_point	start;
 	t_point	end;
@@ -40,7 +52,7 @@ void	draw_vision(t_point point, t_all * vars)
 		// end.x += temp * point.z;
 	//	end.y = point.y - modff(vars->player.sideDist.y, &temp) * point.z;
 		// end.y -= temp * point.z;
-		DDA(start, end, point.z / 5, vars);
+		dda(start, end, point.z / 5, vars);
 		x += WIN_WIDTH - 1;
 	}
 	
@@ -80,7 +92,7 @@ void	draw_minimap(t_point point, t_all *vars)
 	{
 		drow.x = point.x;
 		j = 0;
-		while (vars->map[i][j + 1])
+		while (vars->map[i][j])
 		{
 			color = get_color_minimap(vars->map[i][j]);
 			if (color != -1)

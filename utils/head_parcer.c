@@ -1,4 +1,28 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   head_parcer.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tjamis <tjamis@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/04/11 16:29:49 by tjamis            #+#    #+#             */
+/*   Updated: 2022/04/11 18:21:06 by tjamis           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub3d.h"
+
+int	get_color(char *str, int *i, int count, int *color)
+{
+	while (str[*i] && ft_isspace(str[*i]))
+		(*i)++;
+	if (!str[*i] || !ft_isdigit(str[*i]))
+		return (-1);
+	color[count] = ft_atoi(str + *i);
+	if (color[count] >= 255 || color[count] < 0)
+		return (-1);
+	return (0);
+}
 
 int	set_color(t_all *vars, char *str)
 {
@@ -10,18 +34,21 @@ int	set_color(t_all *vars, char *str)
 	i = 0;
 	while (count < 3)
 	{
-		while (str[i] && ft_isspace(str[i]))
-			i++;
-		if (!str[i] || !ft_isdigit(str[i]))
+		if (get_color(str, &i, count, color))
 			return (-1);
-		color[count] = ft_atoi(str + i);
 		count++;
 		while (str[i] && ft_isdigit(str[i]))
 			i++;
+		while (str[i] && ft_isspace(str[i]))
+			i++;
 		if (str[i] && str[i] == ',')
 			i++;
+		else if (count < 3)
+			return (-1);
 	}
-	if (count == 3)
+	while (str[i] && ft_isspace(str[i]))
+		i++;
+	if (count == 3 && !str[i])
 		return (create_trgb(0, color[0], color[1], color[2]));
 	return (-1);
 }
@@ -44,22 +71,6 @@ int	set_ceilling_color(t_all *vars, char *str)
 	if (vars->color_c == -1)
 		return (1);
 	return (0);
-}
-
-void	*init_head_parcer(t_all *vars)
-{
-	int	(**func)(t_all *, char *);
-
-	func = ft_calloc(6, sizeof(void *));
-	func[0] = set_ceilling_color;
-	func[1] = set_floor_color;
-	func[2] = set_NO_texture;
-	func[3] = set_SO_texture;
-	func[4] = set_WE_texture;
-	func[5] = set_EA_texture;
-	vars->color_c = -1;
-	vars->color_f = -1;
-	return (func);
 }
 
 int	head_parcer(t_all *vars, int file)

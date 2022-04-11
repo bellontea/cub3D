@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cub3d.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tjamis <tjamis@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/04/11 16:33:32 by tjamis            #+#    #+#             */
+/*   Updated: 2022/04/11 18:22:10 by tjamis           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef CUB3D_H
 # define CUB3D_H
 
@@ -71,15 +83,15 @@ typedef struct s_player //структура для игрока и луча
 	t_dot	dir;
 	t_dot	plane;
 	t_dot	rayDir;
-	t_point currRayOnMap;
-	t_dot sideDist;
-	t_dot deltaDist;
-	int side;
-	t_point step;
-	double planeWallDist;
-	int drawStart;
-	int drawEnd;
-	int lineHeight;
+	t_point	currRayOnMap;
+	t_dot	sideDist;
+	t_dot	deltaDist;
+	int		side;
+	t_point	step;
+	double	planeWallDist;
+	int		drawStart;
+	int		drawEnd;
+	int		lineHeight;
 	float	angle;
 }			t_player;
 
@@ -123,7 +135,7 @@ int		key_press(int key, t_all *vars);
 int		key_realease(int key, t_all *vars);
 int		init_player(t_all *vars);
 void	raycaster(t_all *vars);
-void	DDA(t_point start, t_point end, int size, t_all *vars);
+void	dda(t_point start, t_point end, int size, t_all *vars);
 void	drow_sqr(t_point point, int color, t_image *img);
 void	draw_vision(t_point point, t_all *vars);
 void	draw_player(t_point point, t_all *vars);
@@ -131,13 +143,16 @@ int		get_color_minimap(char ch);
 void	draw_minimap(t_point point, t_all *vars);
 int		head_parcer(t_all *vars, int file);
 void	*get_x_y(t_image *img, int x, int y);
-int		set_NO_texture(t_all *vars, char *str);
-int		set_SO_texture(t_all *vars, char *str);
-int		set_WE_texture(t_all *vars, char *str);
-int		set_EA_texture(t_all *vars, char *str);
+int		set_no_texture(t_all *vars, char *str);
+int		set_so_texture(t_all *vars, char *str);
+int		set_we_texture(t_all *vars, char *str);
+int		set_ea_texture(t_all *vars, char *str);
 int		set_player(t_all *vars, int y);
 int		check_map(char **map);
-void init_ray_vars(t_all *vars, int x);
+void	init_ray_vars(t_all *vars, int x);
 void	rayDDA(t_all *vars);
+void	*init_head_parcer(t_all *vars);
+int		set_ceilling_color(t_all *vars, char *str);
+int		set_floor_color(t_all *vars, char *str);
 
 #endif

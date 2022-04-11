@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   set_texture.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tjamis <tjamis@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/04/11 16:30:25 by tjamis            #+#    #+#             */
+/*   Updated: 2022/04/11 17:54:56 by tjamis           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub3d.h"
 
 int	set_texture(t_all *vars, t_texture *texture)
@@ -29,38 +41,58 @@ int	set_texture(t_all *vars, t_texture *texture)
 	return (0);
 }
 
-int	set_NO_texture(t_all *vars, char *str)
+int	set_no_texture(t_all *vars, char *str)
 {
+	int	i;
+
 	while (ft_isspace(*str))
 		str++;
-	str[ft_strlen(str) - 1] = 0;
+	i = ft_strlen(str) - 1;
+	while (ft_isspace(str[i]))
+		i--;
+	str[i + 1] = 0;
 	vars->texture[0].file_name = str;
 	return (set_texture(vars, vars->texture));
 }
 
-int	set_SO_texture(t_all *vars, char *str)
+int	set_so_texture(t_all *vars, char *str)
 {
+	int	i;
+
 	while (ft_isspace(*str))
 		str++;
-	str[ft_strlen(str) - 1] = 0;
+	i = ft_strlen(str) - 1;
+	while (ft_isspace(str[i]))
+		i--;
+	str[i + 1] = 0;
 	vars->texture[1].file_name = str;
 	return (set_texture(vars, vars->texture + 1));
 }
 
-int	set_WE_texture(t_all *vars, char *str)
+int	set_we_texture(t_all *vars, char *str)
 {
+	int	i;
+
 	while (ft_isspace(*str))
 		str++;
-	str[ft_strlen(str) - 1] = 0;
+	i = ft_strlen(str) - 1;
+	while (ft_isspace(str[i]))
+		i--;
+	str[i + 1] = 0;
 	vars->texture[2].file_name = str;
 	return (set_texture(vars, vars->texture + 2));
 }
 
-int	set_EA_texture(t_all *vars, char *str)
+int	set_ea_texture(t_all *vars, char *str)
 {
+	int	i;
+
 	while (ft_isspace(*str))
 		str++;
-	str[ft_strlen(str) - 1] = 0;
+	i = ft_strlen(str) - 1;
+	while (ft_isspace(str[i]))
+		i--;
+	str[i + 1] = 0;
 	vars->texture[3].file_name = str;
 	return (set_texture(vars, vars->texture + 3));
 }
