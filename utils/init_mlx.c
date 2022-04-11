@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_mlx.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mslyther <mslyther@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tjamis <tjamis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/11 16:29:55 by tjamis            #+#    #+#             */
-/*   Updated: 2022/04/11 20:06:53 by mslyther         ###   ########.fr       */
+/*   Updated: 2022/04/11 20:17:29 by tjamis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 int	init_mlx(t_all *vars, int argc, char **argv)
 {
+	(void)argv;
+	(void)argc;
 	vars->win.mlx = mlx_init();
 	if (vars->win.mlx == NULL)
 		return (1);

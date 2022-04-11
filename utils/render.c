@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mslyther <mslyther@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tjamis <tjamis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/11 16:30:23 by tjamis            #+#    #+#             */
-/*   Updated: 2022/04/11 20:08:30 by mslyther         ###   ########.fr       */
+/*   Updated: 2022/04/11 20:17:46 by tjamis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,6 @@ void	change_angle(t_all *vars)
 
 void	move_p(t_all *vars)
 {
-	double	temp;
 	double	delt_x;
 	double	delt_y;
 

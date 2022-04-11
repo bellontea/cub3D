@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   textuting_and_drawing.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mslyther <mslyther@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tjamis <tjamis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/11 19:25:04 by mslyther          #+#    #+#             */
-/*   Updated: 2022/04/11 20:10:49 by mslyther         ###   ########.fr       */
+/*   Updated: 2022/04/11 20:20:14 by tjamis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@ int	define_texture(t_player plr)
 	if (plr.side == X_SIDE)
 	{
 		if (plr.pos.x < plr.curr_ray_on_map.x)
-			return (EA);
-		return (WE);
+			return (WE);
+		return (EA);
 	}
 	if (plr.pos.y < plr.curr_ray_on_map.y)
 		return (SO);

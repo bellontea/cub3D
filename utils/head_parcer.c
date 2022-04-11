@@ -6,7 +6,7 @@
 /*   By: tjamis <tjamis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/11 16:29:49 by tjamis            #+#    #+#             */
-/*   Updated: 2022/04/11 19:38:44 by tjamis           ###   ########.fr       */
+/*   Updated: 2022/04/11 20:16:45 by tjamis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	get_color(char *str, int *i, int count, int *color)
 	return (0);
 }
 
-int	set_color(t_all *vars, char *str)
+int	set_color( char *str)
 {
 	int	i;
 	int	count;
@@ -57,7 +57,7 @@ int	set_floor_color(t_all *vars, char *str)
 {
 	if (vars->color_f != -1)
 		return (1);
-	vars->color_f = set_color(vars, str);
+	vars->color_f = set_color(str);
 	if (vars->color_f == -1)
 		return (1);
 	return (0);
@@ -67,7 +67,7 @@ int	set_ceilling_color(t_all *vars, char *str)
 {
 	if (vars->color_c != -1)
 		return (1);
-	vars->color_c = set_color(vars, str);
+	vars->color_c = set_color(str);
 	if (vars->color_c == -1)
 		return (1);
 	return (0);

@@ -6,7 +6,7 @@
 /*   By: tjamis <tjamis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/11 16:29:25 by tjamis            #+#    #+#             */
-/*   Updated: 2022/04/11 18:23:13 by tjamis           ###   ########.fr       */
+/*   Updated: 2022/04/11 20:16:08 by tjamis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	check_space(char **map, int x, int y)
 		j = -1;
 		while (j <= 1)
 		{
-			if (y != 0 && x != 0 && !(ft_strlen(map[y + i]) < x + j
+			if (y != 0 && x != 0 && !((int)ft_strlen(map[y + i]) < x + j
 					|| map[y + i][x + j] == '0' || map[y + i][x + j] == '1'))
 				return (1);
 			j++;

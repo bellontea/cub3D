@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_minimap.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mslyther <mslyther@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tjamis <tjamis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/11 16:29:39 by tjamis            #+#    #+#             */
-/*   Updated: 2022/04/11 19:50:13 by mslyther         ###   ########.fr       */
+/*   Updated: 2022/04/11 20:16:21 by tjamis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@ void	draw_vision(t_point point, t_all *vars)
 {
 	t_point	start;
 	t_point	end;
-	float	temp;
 	int		i;
 
 	i = 0;
@@ -65,7 +64,6 @@ void	draw_vision(t_point point, t_all *vars)
 
 void	draw_player(t_point point, t_all *vars)
 {
-	float	temp;
 	int		i;
 
 	i = 0;
