@@ -11,7 +11,7 @@ Requirements
 ### Building the program
 1. Склонировать репозиторий
 
-		git clone https://github.com/ImaginaryDen/minishell.git'
+		git clone https://github.com/bellontea/cub3D.git
 
 2. В корневой директории прописать
 
