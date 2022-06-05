@@ -14,7 +14,7 @@ SRCS_UTILS	=	$(shell ls ./utils/*.c) $(shell ls ./raycaster/*.c)
 SRC			=	$(SRCS_UTILS) main.c
 OBJ			=	$(addprefix $(OBJ_DIR)/, $(SRC:.c=.o)) $(LIBFT)
 
-CFLAGS		=	-o3 -I$(PATH_HEADER) -Imlx -I$(INC) -Wall -Wextra -Werror 
+CFLAGS		=	-o3 -I$(PATH_HEADER) -Imlx -I$(INC)
 LFLAGS		=	-L./mlx -lmlx -L$(INCLIB) -lXext -lX11 -lm 
 RM			=	rm -rf
 CC			=	gcc
